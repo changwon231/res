@@ -86,12 +86,12 @@ public class EncodingFilter implements Filter {
 		
 		// (2) 응답 객체에 컨텐츠 타입 설정 
 		//    config 객체에서 초기화 파라미터로 넘긴 컨텐트 타입 값 추출
-		String contentType = config.getInitParameter("contentType");
-		response.setContentType(contentType);
+//		String contentType = config.getInitParameter("contentType");
+//		response.setContentType(contentType);
 		
 		// (3) 값 확인을 위한 출력
 		System.out.println("charEncoding:" + charEncoding);
-		System.out.println("contentType:" + contentType);
+//		System.out.println("contentType:" + contentType);
 		
 		// 다음 필터(혹은 서블릿)으로 요청, 응답 객체를 전달
 		chain.doFilter(request, response);

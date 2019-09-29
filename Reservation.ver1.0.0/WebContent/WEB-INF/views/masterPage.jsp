@@ -109,10 +109,10 @@
     <tr>
       	<td height="60px" colspan="4">
         	<div id="cloud" style="width:1650;" align="center">
-         		  <img class="mySlides" src="../img/강의장3.jpg" height="600" width="1600">
-  				  <img class="mySlides" src="../img/강의장.jpg" height="600" width="1600" >
-  				  <img class="mySlides" src="../img/강의장2.jpg" height="600" width="1600">
-  				  <img class="mySlides" src="../img/강의장1.jpg" height="600" width="1600">
+         		  <img class="mySlides" src="../img/studyroom3.jpg" height="600" width="1600">
+  				  <img class="mySlides" src="../img/studyroom.jpg" height="600" width="1600" >
+  				  <img class="mySlides" src="../img/studyroom2.jpg" height="600" width="1600">
+  				  <img class="mySlides" src="../img/studyroom1.jpg" height="600" width="1600">
   				  	<p>チョンヘジン予約システム</p>
          	</div>
       	</td>        
@@ -185,7 +185,7 @@
 		<tr>
 			<th height="66px" colspan="6">
 			<br /><div style="float: left;">
-			<img src="./img/로고.jpg" width="20">
+			<img src="./img/logo.jpg" width="20">
 			<font face="글꼴" color="gray" size="2">copyright &copy; 청해진 시설예약 시스템 2019 by 청해진</font>
 			<hr />
 			</div>

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page import="java.util.Enumeration"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,24 +13,38 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="res?action=adminFacUpdate" method="post" enctype="multipart/form-data">
+		메인사진
+		<input type="file" name="profile">	
+        <%--
+	String fileName1 = "";
+	String orgfileName1 = "";
 
+	
+	String uploadPath = request.getRealPath("upload"); 
 
-			<div ID="first">
-				<input id="a" type="image" src="" height="70" width="60"/>
-				메인사진
-				<input type="file" name="profile">
-            	<input type="submit">		
+	try {
+		MultipartRequest multi = new MultipartRequest( 
+				request, 
+				uploadPath,
+				100 * 1024,
+				"utf-8", 
+				new DefaultFileRenamePolicy() 
+		);
+
+		fileName1 = multi.getFilesystemName("file1"); 
+		orgfileName1 = multi.getOriginalFileName("file1"); 
+
+		
+	} catch (Exception e) {
+		e.getStackTrace();
+	}
+--%>
+<%-- 		<input type="text" name="fileName1" value="<%=fileName1%>">  --%>
+<%-- 		<input type="text" name="orgfileName1" value="<%=orgfileName1%>"> --%>
+<!-- 		<input type="submit" value="업로드 확인"> -->
 			
-				<input id="b" type="image" src="" height="70" width="60"/>
-				<input type="file" name="profile">
-            	<input type="submit">		
-			
-				<input id="c" type="image" src="" height="70" width="60"/>
-				<input type="file" name="profile">
-            	<input type="submit">		
-			
-			</div>
-			
+	
 <table>
 	<tr>
 		<th>시설위치</th>
@@ -32,12 +52,13 @@
 			<select class="w3-select"  name="address" id="address"
 			        onchange="checkAddress();" >
 				<option value="">== 위치를 선택하세요 ==</option>
-				<option value="main">본관</option>
-				<option value="nature">자연관</option>
-				<option value="people">인문관</option>
-				<option value="engineer">공학관</option>
-				<option value="oneflower">원화관</option>
-				<option value="outdoor">야외시설</option>
+				
+<!-- 				<option value="main">본관</option> -->
+<!-- 				<option value="nature">자연관</option> -->
+<!-- 				<option value="people">인문관</option> -->
+<!-- 				<option value="engineer">공학관</option> -->
+<!-- 				<option value="oneflower">원화관</option> -->
+<!-- 				<option value="outdoor">야외시설</option> -->
 			</select>
 		</td>
 		<th>층</th>
@@ -104,7 +125,7 @@
 	</tr>
 	
 </table>			
-      
+</form>      
       
 </body>
 </html>

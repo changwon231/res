@@ -19,13 +19,13 @@
 
 	<!-- 건물 조회 -->
 	<select id="selectFacility" resultType="Code">
-	SELECT c.code
-	     , c.code_nm
-	     , c.code_val
-	     , c.code_desc
-	FROM CODE c
-	WHERE c.p_code = 2000
-	  AND c.use_yn = 'Y'
+		SELECT c.code
+		     , c.code_nm
+		     , c.code_val
+		     , c.code_desc
+		FROM CODE c
+		WHERE c.p_code = 2000
+		  AND c.use_yn = 'Y'
 	</select>
 	
 	<!-- 시설  조회 -->

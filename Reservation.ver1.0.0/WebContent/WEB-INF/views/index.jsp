@@ -2,31 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="UTF-8">
-    <title>강의장 예약 시스템 메인 페이지</title>
-
-  	  <link rel="stylesheet"type="text/css"href="/style"/>
-    </head>
-    <body>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>강의장 예약 시스템 메인 페이지</title>
+<link rel="stylesheet"type="text/css"href="/css/style.css"/>
+<%-- <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css"/> --%>
+</head>
+<body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"></c:set>
 
 <table>
-	 <tr id="number1">
+	<tr id="number1">
     	<th height="40px" colspan="4" >
     	<div style="float:right;">
     		<jsp:include page="/header"/>
     	</div>
     	</th>
     </tr>      
-     <tr>
+    <tr>
           	<td height="60px" colspan="4">
             	<div id="cloud" style="width:650;" align="center">
-             		  <img class="mySlides" src="./img/강의장3.jpg" height="300" width="1000">
-      				  <img class="mySlides" src="./img/강의장.jpg" height="300" width="1000" >
-      				  <img class="mySlides" src="./img/강의장2.jpg" height="300" width="1000">
-      				  <img class="mySlides" src="./img/강의장1.jpg" height="300" width="1000">
+             		  <img class="mySlides" src="${contextPath}/img/studyroom3.jpg" height="300" width="1000">
+      				  <img class="mySlides" src="${contextPath}/img/studyroom.jpg" height="300" width="1000" >
+      				  <img class="mySlides" src="${contextPath}/img/studyroom2.jpg" height="300" width="1000">
+      				  <img class="mySlides" src="${contextPath}/img/studyroom1.jpg" height="300" width="1000">
       				  	<p>チョンヘジン予約システム</p>
               	</div>
           	</td>

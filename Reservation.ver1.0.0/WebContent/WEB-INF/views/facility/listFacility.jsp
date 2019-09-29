@@ -14,7 +14,7 @@
 <form action="${contentPath}main" method="get">
 	<table>
 		<tr>
-			<th colspan="2"> 건물 정보 보기</th>
+			<th colspan="1"> 건물 정보 보기</th>
 			<th>강의장 위치</th>
 			<th>강의장 타입</th>
 			<th>허용 인원</th>
@@ -22,10 +22,10 @@
 		</tr>
 		<c:forEach var="facility" items="${requestScope.facilitys}">
 			<tr>
-				<td>${facility.buildingCd}</td>
-				<td>${facility.facType}</td>
-				<td>${facility.peopleLmCd}</td>
-				<td>${faciiity.facNm }</td>
+				<td>&nbsp;&nbsp; ${facility.codeVal}</td>
+				<td>&nbsp;&nbsp;${facility.codeNm}</td>
+				<td>${facility.codeDesc}</td>
+				<td>${facility.facNm}</td>
 				<td><button type="button" id="delete" onclick="location.href='chooesFacility'">선택</button></td>
 			</tr>
 		</c:forEach>	

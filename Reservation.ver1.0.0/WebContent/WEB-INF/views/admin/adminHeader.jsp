@@ -12,9 +12,10 @@
     		<th>
     		<div>
     		안녕하세요! ${custId}
-    		<button id="jjoin" type="button" value="LOGOUT" onclick="location.href='MainPage.jsp'"> LOGOUT</button>
-    		<button id="jjoin" type="button" value="MYPAGE" onclick="location.href='adminStatus'">MYPAGE</button>
-    		<button id="jjoin" type="button" value="講義場管理" onclick="location.href='adminFacUpdate'">講義場管理</button>
+<!--     		<button id="jjoin" type="button" value="LOGOUT" onclick="location.href='MainPage.jsp'"> LOGOUT</button> -->
+    		<button id="jjoin" type="button" value="LOGOUT" onclick="location.href='res?action=logout'"> LOGOUT</button>
+    		<button id="jjoin" type="button" value="MYPAGE" onclick="location.href='res?action=adminStatus'">MYPAGE</button>
+    		<button id="jjoin" type="button" value="講義場管理" onclick="location.href='res?action=adminFacUpdate'">講義場管理</button>
     		</div>
     		</th>
     	</tr>

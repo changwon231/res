@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>Reservation.ver1.0.0</display-name>
+ 
   <servlet>
     <servlet-name>mainJsp</servlet-name>
     <jsp-file>/WEB-INF/views/main.jsp</jsp-file>
@@ -147,7 +148,7 @@
     <url-pattern>/custUpdate</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>chooesFacilityJsp</servlet-name>
     <jsp-file>/WEB-INF/views/facility/chooesFacility.jsp</jsp-file>
   </servlet>
@@ -156,7 +157,7 @@
     <url-pattern>/chooesFacility</url-pattern>
   </servlet-mapping>
   
-     <servlet>
+  <servlet>
     <servlet-name>adminIndexJsp</servlet-name>
     <jsp-file>/WEB-INF/views/admin/adminIndex.jsp</jsp-file>
   </servlet>
@@ -165,7 +166,7 @@
     <url-pattern>/adminIndex</url-pattern>
   </servlet-mapping>
    
-     <servlet>
+  <servlet>
     <servlet-name>adminListJsp</servlet-name>
     <jsp-file>/WEB-INF/views/admin/adminList.jsp</jsp-file>
   </servlet>
@@ -175,7 +176,7 @@
   </servlet-mapping>
  
    
-     <servlet>
+  <servlet>
     <servlet-name>adminStatusJsp</servlet-name>
     <jsp-file>/WEB-INF/views/admin/adminStatus.jsp</jsp-file>
   </servlet>
@@ -185,7 +186,7 @@
   </servlet-mapping>
  
    
-     <servlet>
+  <servlet>
     <servlet-name>adminHeaderJsp</servlet-name>
     <jsp-file>/WEB-INF/views/admin/adminHeader.jsp</jsp-file>
   </servlet>
@@ -194,7 +195,7 @@
     <url-pattern>/adminHeader</url-pattern>
   </servlet-mapping>
  
-      <servlet>
+  <servlet>
     <servlet-name>adminFacUpdateJsp</servlet-name>
     <jsp-file>/WEB-INF/views/admin/adminFacUpdate.jsp</jsp-file>
   </servlet>
@@ -202,7 +203,16 @@
     <servlet-name>adminFacUpdateJsp</servlet-name>
     <url-pattern>/adminFacUpdate</url-pattern>
   </servlet-mapping>
- 
+
+   <servlet>
+    <servlet-name>facChackJsp</servlet-name>
+    <jsp-file>/WEB-INF/views/admin/facChack.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>facChackJsp</servlet-name>
+    <url-pattern>/facChack</url-pattern>
+  </servlet-mapping>
+
  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

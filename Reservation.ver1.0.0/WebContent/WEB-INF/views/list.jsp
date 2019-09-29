@@ -17,16 +17,16 @@
 	      		<div ID="first">
 					<%-- <a href="${pageContext.request.contextPath}/main?action=selectFacility"><input id="a" type="image" src="./img/본관.jpg" height="150" width="150" /></a> --%>
 					<a href="${pageContext.request.contextPath}/res?action=selectFacility">
-					<input type="image" src="./img/원화관.PNG" height="250" width="380" value="1001"/>
-					<input type="image" src="./img/원화관.PNG" height="250" width="380" value="1002"/>
-					<input type="image" src="./img/공학관.PNG" height="250" width="380" value="1003"/>			
+					<input type="image" src="./img/main.PNG" height="250" width="380" value="1001"/>
+					<input type="image" src="./img/computer.PNG" height="250" width="380" value="1002"/>
+					<input type="image" src="./img/engineering.PNG" height="250" width="380" value="1003"/>			
 					</a>
 				</div>                                
 				<div ID="second">                     
-					<input type="image" src="./img/인문관.PNG" height="220" width="260"/>
-					<input type="image" src="./img/자연관.PNG" height="220" width="260"/>
-					<input type="image" src="./img/야외시설.PNG" height="220" width="260"/>
-					<input type="image" src="./img/시설안내.PNG" height="220" width="260"/>
+					<input type="image" src="./img/humanity.PNG" height="220" width="260"/>
+					<input type="image" src="./img/nature.PNG" height="220" width="260"/>
+					<input type="image" src="./img/outFac.PNG" height="220" width="260"/>
+					<input type="image" src="./img/facInfo.PNG" height="220" width="260"/>
 	         	</div>
 				</c:when>
 				<c:otherwise>

@@ -1,7 +1,9 @@
 package reservation.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import reservation.dao.AdminDaoIf;
 import reservation.dao.AdminDaoImpl;
@@ -18,6 +23,7 @@ import reservation.dao.CustomerDaoIf;
 import reservation.dao.CustomerDaoImpl;
 import reservation.dao.FacilityDaoIf;
 import reservation.dao.FacilityDaoImpl;
+import reservation.exception.DuplicateException;
 import reservation.vo.Admin;
 import reservation.vo.Code;
 import reservation.vo.Customer;
@@ -40,23 +46,23 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request
 	           , HttpServletResponse response) throws ServletException, IOException {
-				// 1. 공통작업
-				// 요청으로부터 action 파라미터 추출
-				String action = request.getParameter("action");
-				getCodeList(request, response);
+			// 1. 공통작업
+			// 요청으로부터 action 파라미터 추출
+			String action = request.getParameter("action");
+			getCodeList(request, response);
+			
+			System.out.println("action=" + action + ", method=" + request.getMethod());
+			
+			// 2. 서브 컨트롤러 분기
+			if ("selectFacility".equals(action)) {
+				selectFacility(request, response);
+			
+			} else if ("searchFacility".equals(action)) {
+				searchFacility(request, response);	
+			
+			} else if ("join".equals(action)) {
+				join(request, response);
 				
-				System.out.println("action=" + action + ", method=" + request.getMethod());
-				
-				// 2. 서브 컨트롤러 분기
-				if ("selectFacility".equals(action)) {
-					selectFacility(request, response);
-				
-				} else if ("searchFacility".equals(action)) {
-					searchFacility(request, response);	
-				
-				} else if ("join".equals(action)) {
-					join(request, response);
-					
 //				} else if ("detail".equals(action)) {
 //					detail(request, response);
 //					
@@ -69,36 +75,106 @@ public class MainServlet extends HttpServlet {
 //				} else if ("insert".equals(action)) {
 //					insert(request, response);
 //					
-				} else if ("login".equals(action)) {
-					login(request, response);
+			} else if ("login".equals(action)) {
+				login(request, response);
 //					
-				} else if ("logout".equals(action)) {
-					logout(request, response);
-//					
-				} else {
-					// localhost:8080/reser/ 로 진입할 때
-					goMainPage(request, response);
-				}
+			} else if ("logout".equals(action)) {
+				logout(request, response);
+				
+			} else if ("adminFacUpdate".equals(action)) {
+				adminFacUpdate(request, response);
+				
+			} else {
+				// localhost:8080/reser/ 로 진입할 때
+				goMainPage(request, response);
+			}
 
 	}
 	
 	
 	
-	
-	
-	
+	private void adminFacUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String method = request.getMethod();
+		
+		if ("GET".equals(method)) {
+			// 1. 건물 조회하기
+			CodeDaoIf dao = new CodeDaoImpl();
+			List<Code> buildings = dao.selectFacility();
+			List<Code> facilities = dao.selectPlace();
+			
+			// 2. 필요한 코드 있으면 조회
+			
+			// 3. 요청 객체에 추가
+			request.setAttribute("facilities", facilities);
+			request.setAttribute("buildings", buildings);
+			
+			// 4. 페이지 이동
+			String view = "adminFacUpdate";
+			request.getRequestDispatcher(view).forward(request, response);
+			
+		} else if ("POST".equals(method)) {
+			// upload multipart resrouce
+			String uploadPath = request.getRealPath("upload"); 
+			
+			try {
+				MultipartRequest multi = new MultipartRequest( 
+						request, 
+						uploadPath,
+						100 * 1024,
+						"utf-8", 
+						new DefaultFileRenamePolicy() 
+						);
+				
+//				fileName1 = multi.getFilesystemName("file1"); 
+//				orgfileName1 = multi.getOriginalFileName("file1"); 
+				
+				
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+			
+			// 1. get request parameters
+			String profile = request.getParameter("profile");
+			
+			// 2. make image path
+			String fileImagePath = getServletContext().getContextPath() + "/upload/" + profile;
+//			request.setAttribute("fileImagePath", fileImagePath);
+		
+			
+			// 3. insert database
+			// (1) get dao
+			FacilityDaoIf facDao = new FacilityDaoImpl();
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("facImg", fileImagePath);
+			
+			try {
+				// (2) execute insert query
+				facDao.insert(map);
+				
+				//... ?
+				// 신규 입력 성공 메세지 처리
+				// 이동 페이지에 필요한 데이터가 있다면 요청 객체에 추가
+				// 신규 입력 후 이동할 페이지 선택
+				// 페이지 이동
+			} catch (DuplicateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+	}
+
+
+
 	private void join(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-
-
-
-
 	private void searchFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. dao 객체 얻기
 		String method = request.getMethod();
 		
 		 if ("POST".equals(method)) {			
@@ -112,6 +188,7 @@ public class MainServlet extends HttpServlet {
 			facility.setFacType(facType);
 			facility.setPeopleLmCd(peopleLmCd);
 			
+			// 1. dao 객체 얻기
 			FacilityDaoIf facDao = new FacilityDaoImpl();
 			
 			// 2. dao 객체에 목록 조회 메소드 호출 하여 결과 얻기
@@ -133,9 +210,6 @@ public class MainServlet extends HttpServlet {
 		request.getRequestDispatcher(view).forward(request, response);
 		
 	}
-
-
-
 
 
 
@@ -169,33 +243,28 @@ public class MainServlet extends HttpServlet {
 	}
 
 
-
-
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 		// 로그아웃 처리를 위해서는
 		// 1. 현재 이 요청에 연결된 세션 객체 얻기 false 로 얻어냄
-			HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);
+		
 		// 세션에 붙어 있던 아이디 추출
-				String adminId = (String) session.getAttribute("adminId");
+		String userId = (String) session.getAttribute("userId");
+		
 		// 2. 얻어진 세션 객체가 null 이 아니면, userId 가 있었으면
-		if (session != null && adminId != null) {
+		if (session != null && userId != null) {
 			// 로그인 중으로 판단하고 해제함
-						// 3. 세션 invalidate() 처리
-						session.invalidate();
-						
+			// 3. 세션 invalidate() 처리
+			session.invalidate();
 		}
-		
-		// 4. 초기 화면으로 이동
-		response.sendRedirect("/index");
-		
-	}
+
+	// 4. 초기 화면으로 이동
+	response.sendRedirect("/index");
 	
+	}
 
-
-
-
-
-
+	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 요청된 HTTP 메소드 추출
 		String method = request.getMethod();
@@ -246,8 +315,8 @@ public class MainServlet extends HttpServlet {
 					// 로그인 실패 : 메시지 처리 => 로그인 화면으로 다시 이동
 					
 					// 다시 로그인 시도하도록 로그인 화면으로 nextPage 설정
-		//				String nextPage = "/res?action=login";
-		//				request.setAttribute("nextPage", nextPage);
+//						String nextPage = "/res?action=login";
+//						request.setAttribute("nextPage", nextPage);
 					
 				}
 					// 메인 화면 뷰 이동
@@ -277,15 +346,13 @@ public class MainServlet extends HttpServlet {
 					//  nextPage 설정
 //					String contextPath = "/header";
 //					request.setAttribute("contextPath", contextPath);
-					
-				
-					
+									
 				} else {
 					// 로그인 실패 : 메시지 처리 => 로그인 화면으로 다시 이동
 					
 					// 다시 로그인 시도하도록 로그인 화면으로 nextPage 설정
-		//				String nextPage = "/res?action=login";
-		//				request.setAttribute("nextPage", nextPage);
+//						String nextPage = "/res?action=login";
+//						request.setAttribute("nextPage", nextPage);
 					
 				}
 				// 메인 화면 뷰 이동
@@ -294,9 +361,6 @@ public class MainServlet extends HttpServlet {
 			}
 		}
 	}
-
-
-
 
 
 
