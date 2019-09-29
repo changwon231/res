@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reservation.mapper.CustomerMapper">
+	<!-- 로그인 -->
+	<select id="login" parameterType="Customer" resultType="integer">
+		SELECT c.cust_seq
+		  FROM CUSTOMER c
+		 WHERE c.cust_id = #{custId}
+		   AND c.password = #{password}
+	</select>
+	
+	<!-- 기본 정보 출력 -->
+	<select id="select" parameterType="Customer" resultType="Customer">
+		SELECT c.cust_seq
+		     , c.cust_id
+		     , c.name
+		     , c.password
+		     , c.cust_type
+		     , c.cust_nb
+		     , c.email
+		     , c.phone
+		     , c.reg_id
+		  FROM CUSTOMER c
+		<if test="custSeq != null">	
+		 WHERE c.cust_seq = 1
+		</if>
+		 ORDER BY c.cust_seq
+	</select>
+	
+	<!-- 회원가입시 정보 입력 -->
+	<insert id="insert" parameterType="map">
+		INSERT INTO CUSTOMER 
+			 ( CUST_SEQ
+			 , CUST_ID
+			 , NAME
+			 , PASSWORD
+			 , CUST_TYPE
+			 , CUST_NB
+			 , EMAIL
+			 , PHONE
+			 , REG_ID)
+		VALUES 
+		 	 ( SEQ_CUST.NEXTVAL
+		 	 , #{custId}
+		 	 , #{name}
+		 	 , #{password}
+		 	 , #{custType}
+		 	 , #{custNb}
+		 	 , #{email}
+       		 , #{phone}
+       		 , #{regId})
+	</insert>
+	
+	<!-- 기본정보 수정 -->
+	<update id="update" parameterType="map" >
+		UPDATE CUSTOMER c 
+		   SET c.NAME = #{name}
+		     , c.CUST_TYPE = #{custType}
+		     , c.CUST_NB = #{custNm}
+		     , c.EMAIL = #{email}
+		     , c.PHONE = #{phone}
+		 WHERE c.CUST_SEQ = #{custSeq}
+	</update>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="passwordUpdate" parameterType="map" >
+		UPDATE CUSTOMER c 
+		   SET c.PASSWORD = #{password}
+		 WHERE c.CUST_SEQ = #{custSeq} 
+	</update>
+	
+  	
+  	
+</mapper>

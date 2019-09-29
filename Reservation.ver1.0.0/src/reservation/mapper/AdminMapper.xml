@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- AdminMapper.xml
+  
+  
+   오진오
+  
+  
+   -->
+  
+  <mapper namespace="reservation.mapper.AdminMapper">
+  
+  <!-- 관리자 정보 인설트 1건  -->
+  <insert id="insert" parameterType="map">
+  	INSERT INTO ADMIN
+  		(ADMIN_SEQ
+  	   , ADMIN_ID	
+  	   , NAME
+  	   , PASSWORD
+  	   , ADMIN_TYPE
+  	   , EMAIL
+  	   , PHONE
+  	   , REG_ID)
+  	VALUES
+  	    (SEQ_ADMIN.NEXTVAL
+  	   , #{adminId} 
+  	   , #{name}
+  	   , #{password}
+  	   , #{adminType}
+  	   , #{email}
+  	   , #{phone}
+  	   , #{regId})
+  </insert>
+  
+  <!-- 관리자 정보 업데이트 -->
+  <update id="update" parameterType="map">
+  	UPDATE ADMIN a
+  		SET  a.admin_id = #{adminId}
+     	   , a.name = #{name}
+  	       , a.password = #{password}
+     	   , a.admin_type =#{adminType}
+     	   , a.email = #{email}
+    	   , a.phone = #{phone}
+    	   , a.mod_id = #{modId}
+    	   , a.mod_date = SYSDATE
+ 	   WHERE a.admin_seq = #{adminSeq}
+  </update>
+  
+  <!-- 관리자 정보 삭제	 -->
+  <delete id="delete" parameterType="Admin">
+  	DELETE ADMIN a
+  	 WHERE a.admin_seq = #{adminSeq}
+  </delete>
+  
+  <!-- 관리자 1건 존재 여부 검색 -->
+	<select id="isExists" 
+	        parameterType="Admin"
+	        resultType="integer">
+		SELECT a.admin_seq
+		  FROM ADMIN a
+		 WHERE a.admin_seq = #{adminSeq}
+	</select>
+	
+	<select id="login" parameterType="Admin" resultType="integer">
+  		SELECT a.admin_seq
+		  FROM ADMIN a
+		 WHERE a.admin_id = #{adminId}
+		   AND a.password = #{password}
+  	</select>
+  	
+  	
+  </mapper>
+  
+  
+  
+  

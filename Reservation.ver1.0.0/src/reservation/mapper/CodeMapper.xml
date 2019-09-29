@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reservation.mapper.CodeMapper">
+
+	<!-- 예약 조회 -->
+	<select id="selectReservation" resultType="Code">
+	SELECT c.code
+	     , c.p_code
+	     , c.code_nm
+	     , c.code_val
+	     , c.use_yn
+	     , c.code_desc
+	FROM CODE c
+	WHERE c.p_code = 1000
+	</select>
+
+	<!-- 건물 조회 -->
+	<select id="selectFacility" resultType="Code">
+	SELECT c.code
+	     , c.code_nm
+	     , c.code_val
+	     , c.code_desc
+	FROM CODE c
+	WHERE c.p_code = 2000
+	  AND c.use_yn = 'Y'
+	</select>
+	
+	<!-- 시설  조회 -->
+	<select id="selectPlace" resultType="Code">
+	SELECT c.code
+	     , c.code_nm
+	     , c.code_val
+	     , c.code_desc
+	FROM CODE c
+	WHERE c.p_code = 3000
+	  AND c.use_yn = 'Y'
+	</select>
+	
+	<!-- 예약가능인원 조회 -->
+	<select id="selectLimit" resultType="Code">
+		SELECT c.code
+		     , c.code_nm
+		     , c.code_val
+		     , c.code_desc
+		  FROM CODE c
+		 WHERE c.p_code = 4000
+		   AND c.use_yn = 'Y'
+	</select>
+	
+</mapper>

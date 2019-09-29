@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reservation.mapper.FacilityMapper">
+	<insert id="insert" parameterType="map">
+		INSERT INTO FACILITY
+			(FAC_SEQ
+			, FAC_NM
+			, BUILDING_CD
+			, FAC_TYPE
+			, FAC_NB
+			, PEOPLE_LM_CD
+			, RED_ID
+			)
+		VALUES
+			(SEQ_FAC.NEXTVAL
+			, #{facNm}
+			, #{buildingCd}
+			, #{facType}
+			, #{facNb}
+			, #{peopleLmCd}
+			, #{redId}
+			)			
+	</insert>
+	
+	
+	<select  id="select" parameterType="Facility" resultType="Facility">
+		SELECT f.fac_seq
+		     , f.fac_nm
+		     , f.building_cd
+		     , f.code_val
+		     , f.fac_type
+		     , f.code_nm
+		     , f.fac_nb
+		     , f.people_lm_cd
+		     , f.code_desc
+		     , f.reg_id
+		FROM v_facility f
+		  <if test="facSeq != null">
+			 WHERE f.fac_seq = #{facSeq}
+		  </if>
+	</select>
+	
+	
+
+	<update id="update" parameterType="map">
+		UPDATE FACILITY f
+		   SET f.FAC_NM = 		#{facNm}
+		     , f.BUILDING_CD =  #{buildingCd}
+		     , f.FAC_TYPE = 	#{facType}
+		     , f.FAC_NB = 	 	#{facNb}
+		     , f.PEOPLE_LM_CD = #{peopleLmCd}
+		     , f.MOD_ID = 		#{modId}
+		 WHERE f.FAC_SEQ = 		#{facSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM FACILITY f WHERE f.fac_seq = #{facSeq}
+	</delete>
+	
+	 <!-- 관리자 1건 존재 여부 검색 -->
+	<select id="isExists" 
+	        parameterType="Facility"
+	        resultType="integer">
+		SELECT f.FAC_SEQ
+		  FROM FACILITY f
+		 WHERE f.FAC_SEQ = #{facSeq}
+	</select>
+	
+	<select id="serchFacility" parameterType="Facility" resultType="Facility">
+		SELECT f.fac_seq
+		     , f.fac_nm
+		     , f.building_cd
+		     , f.code_val
+		     , f.fac_type
+		     , f.code_nm
+		     , f.fac_nb
+		     , f.people_lm_cd
+		     , f.code_desc
+		     , f.reg_id
+		FROM v_facility f
+		WHERE building_cd = #{buildingCd}
+		  AND f.fac_type = #{facType}
+		  AND f.people_lm_cd = #{peopleLmCd}
+	</select>
+</mapper>
+  
