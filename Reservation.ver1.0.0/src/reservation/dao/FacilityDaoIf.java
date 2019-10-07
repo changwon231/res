@@ -36,5 +36,7 @@ public interface FacilityDaoIf {
 	 */
 	int delete(Facility facility) throws NotFoundException;
 	
-	List<Facility> serchFacility(Facility facility);
+	List<Facility> searchFacility(Facility facility);
+	
+	List<Facility> selectBuildingCd(Facility facility);
 }

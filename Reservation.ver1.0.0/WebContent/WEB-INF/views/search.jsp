@@ -10,11 +10,11 @@
 </head>
 <body>
 
-	<form action="${pageContext.request.contextPath}/res?action=searchFacility" method="post">
+	<form action="${pageContext.request.contextPath}/main?action=searchFacility" method="post">
 		<select name="buildingCd">
 			<option value="">==목록==</option>
 			<c:forEach var="code" items="${requestScope.facilityCodes}">
-				<option value="${code.code }">${code.codeVal}</option>
+				<option value="${code.code}">${code.codeVal}</option>
 <!-- 			<option value="2001">본관</option> -->
 <!-- 			<option value="2002">공학관</option> -->
 <!-- 			<option value="2003">인문관</option> -->

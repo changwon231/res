@@ -6,31 +6,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>listFacility</title>
 </head>
 <body>
 <!-- form>table>(tr>th+td)*10 -->
 
 <form action="${contentPath}main" method="get">
-	<table>
-		<tr>
-			<th colspan="1"> 건물 정보 보기</th>
-			<th>강의장 위치</th>
-			<th>강의장 타입</th>
-			<th>허용 인원</th>
-			<th>호실</th>
-		</tr>
-		<c:forEach var="facility" items="${requestScope.facilitys}">
-			<tr>
-				<td>&nbsp;&nbsp; ${facility.codeVal}</td>
-				<td>&nbsp;&nbsp;${facility.codeNm}</td>
-				<td>${facility.codeDesc}</td>
-				<td>${facility.facNm}</td>
-				<td><button type="button" id="delete" onclick="location.href='chooesFacility'">선택</button></td>
-			</tr>
-		</c:forEach>	
-	</table>
+   <table>
+      <tr>
+         <td>건물 위치</td>
+         <td>강의장 타입</td>
+         <td>허용 인원</td>
+         <td>예약 하기</td>
+      </tr>
+      <c:forEach var="facility" items="${requestScope.facilitys}">
+      <tr>
+         <td>${facility.codeVal}</td>
+         <td>${facility.facNm}</td>
+         <td>${facility.codeDesc}</td>
+         <td><button type="button" id="delete" onclick="location.href='chooesFacility'">선택</button></td>
+      </tr>
+      </c:forEach>   
+   </table>
 </form>
-
 </body>
 </html>

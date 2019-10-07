@@ -32,7 +32,7 @@ import reservation.vo.Facility;
 /**
  * Servlet implementation class MainServlet
  */
-@WebServlet("/res")
+@WebServlet("/main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -192,7 +192,7 @@ public class MainServlet extends HttpServlet {
 			FacilityDaoIf facDao = new FacilityDaoImpl();
 			
 			// 2. dao 객체에 목록 조회 메소드 호출 하여 결과 얻기
-			List<Facility> facilitys = facDao.serchFacility(facility);
+			List<Facility> facilitys = facDao.searchFacility(facility);
 			
 			// 3. 얻어진 결과 request 객체에 속성으로 추가
 			request.setAttribute("facilitys", facilitys);
@@ -368,9 +368,12 @@ public class MainServlet extends HttpServlet {
 		
 		// 1. dao 객체 얻기
 		FacilityDaoIf dao = new FacilityDaoImpl();
+		int buildingCd = Integer.valueOf(request.getParameter("buildingCd"));
+		Facility facility = new Facility();
 		
 		// 2. dao 객체에 목록 조회 메소드 호출 하여 결과 얻기
-		List<Facility> facilitys = dao.select(null);
+		facility.setBuildingCd(buildingCd);
+		List<Facility> facilitys = dao.selectBuildingCd(facility);
 		
 		// 3. 얻어진 결과 request 객체에 속성으로 추가
 		request.setAttribute("facilitys", facilitys);

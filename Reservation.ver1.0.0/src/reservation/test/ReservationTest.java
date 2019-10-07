@@ -113,7 +113,7 @@ public class ReservationTest {
 		fac.setFacType(3001);
 		fac.setPeopleLmCd(4001);
 		
-		System.out.println(Fdao.serchFacility(fac));
+		System.out.println(Fdao.searchFacility(fac));
 		
 //		
 //

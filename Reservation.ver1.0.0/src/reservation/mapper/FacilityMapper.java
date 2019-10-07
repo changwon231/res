@@ -17,5 +17,7 @@ public interface FacilityMapper {
 	
 	Integer isExists(Facility facility);
 	
-	List<Facility> serchFacility(Facility facility);
+	List<Facility> searchFacility(Facility facility);
+	
+	List<Facility> selectBuildingCd(Facility facility);
 }

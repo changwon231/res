@@ -43,21 +43,21 @@ public class FacilityDaoImpl implements FacilityDaoIf {
 	}
 
 	@Override
-	public List<Facility> serchFacility(Facility facility) {
+	public List<Facility> searchFacility(Facility facility) {
 		// 전체 목록이 담길 리스트 변수 선언
-			List<Facility> facilities = null;
+		List<Facility> facilities = null;
 
-				SqlSession session = factory.openSession();
+		SqlSession session = factory.openSession();
 
-				try {
-					FacilityMapper mapper = session.getMapper(FacilityMapper.class);
+		try {
+			FacilityMapper mapper = session.getMapper(FacilityMapper.class);
 
-					facilities = mapper.serchFacility(facility);
+			facilities = mapper.searchFacility(facility);
 
-				} finally {
-					session.close();
-				}
-				return facilities;
+		} finally {
+			session.close();
+		}
+		return facilities;
 	}
 	
 	
@@ -168,6 +168,25 @@ public class FacilityDaoImpl implements FacilityDaoIf {
 		}
 		return exists;
 	}
+
+	@Override
+	public List<Facility> selectBuildingCd(Facility facility) {
+		// 전체 목록이 담길 리스트 변수 선언
+		List<Facility> facilities = null;
+
+		SqlSession session = factory.openSession();
+
+		try {
+			FacilityMapper mapper = session.getMapper(FacilityMapper.class);
+
+			facilities = mapper.selectBuildingCd(facility);
+
+		} finally {
+			session.close();
+		}
+		return facilities;
+	}
+	
 
 
 }

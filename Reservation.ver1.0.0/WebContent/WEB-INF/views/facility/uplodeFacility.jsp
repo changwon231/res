@@ -99,7 +99,7 @@
 </style>
 </head>
 <body>
-<form action="login_screen" action="http://localhost/upload.php" method="post" enctype="multipart/form-data">
+<form action="login_screen" method="post" enctype="multipart/form-data">
 <table>
     <tr>
        <th height="40px" colspan="4" >

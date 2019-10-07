@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="${contextPath}/res?action=login" method="post">
+<form action="${contextPath}main?action=login" method="post">
 	
        
        <div style="float: right;"> 
